@@ -10,10 +10,10 @@
 // And add it to the DOM in the .header-container component
 
 function Header() {
-	let header = document.createElementNS("div");
-	let headerDate = document.createElementNS("span");
-	let headerH1 = document.createElementNS("h1");
-	let headerTemp = document.createElementNS("span");
+	let header = document.createElement("div");
+	let headerDate = document.createElement("span");
+	let headerH1 = document.createElement("h1");
+	let headerTemp = document.createElement("span");
 
 	header.appendChild(headerDate);
 	header.appendChild(headerH1);
@@ -31,4 +31,4 @@ function Header() {
 }
 
 const headerContainer = document.querySelector(".header-container");
-headerContainer.appendChild(Header);
+headerContainer.appendChild(Header());
