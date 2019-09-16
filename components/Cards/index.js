@@ -18,41 +18,42 @@
 //
 // Create a card for each of the articles and add the card to the DOM.
 
-let topicData = axios
-	.get("https://lambda-times-backend.herokuapp.com/topics")
+// let topicData = axios
+// 	.get("https://lambda-times-backend.herokuapp.com/topics")
+// 	.then(results => {
+// 		let topicData = results.data.topics;
+// 		console.log(topicData);
+
+// 		let topic = topicData.forEach(topic => {
+// 			let topicName = topic;
+// 			console.log(topicName);
+// 			return topicName;
+// 		});
+// 		console.log(topic);
+
+// 		// resultsData.forEach(data => {
+//             // 	console.log(newTab(data));
+//             // 	topics.appendChild(newTab(data));
+//             // });
+// 	})
+// 	.catch(error => {
+// 		console.log(error);
+// 	});
+let cardData = axios
+	.get("https://lambda-times-backend.herokuapp.com/articles")
 	.then(results => {
-		let topicData = results.data.topics;
-		console.log(topicData);
+		let articleData = results.data.articles;
+		console.log(articleData);
 
-		let topic = topicData.forEach(topic => {
-			let topicName = topic;
-			console.log(topicName);
-			return topicName;
-		});
-		console.log(topic);
-
-		let cardData = axios
-			.get("https://lambda-times-backend.herokuapp.com/articles")
-			.then(results => {
-				let articleData = results.data.articles;
-				console.log(articleData);
-
-				for (let key in articleData) {
-					console.log(key);
-					console.log(articleData[key]);
-					articleData[key].forEach(data => {
-						cardsContainer.appendChild(newCard(articleData[key]));
-					});
-				}
-				// cardsContainer.appendChild(newCard(articleData));
-			})
-			.catch(error => {
-				console.log(error);
+		for (let key in articleData) {
+			console.log(key);
+			console.log(articleData[key]);
+			let cardData = articleData[key];
+			cardData.forEach(data => {
+				console.log(newCard(data));
+				cardsContainer.appendChild(newCard(data));
 			});
-		// resultsData.forEach(data => {
-		// 	console.log(newTab(data));
-		// 	topics.appendChild(newTab(data));
-		// });
+		}
 	})
 	.catch(error => {
 		console.log(error);
@@ -73,7 +74,7 @@ const newCard = data => {
 	cardAuthor.appendChild(authorName);
 
 	cardHeadline.textContent = data.headline;
-	authorImg.text = data.authorPhoto;
+	authorImg.src = `${data.authorPhoto}`;
 	authorName.textContent = `By ${data.authorName}`;
 
 	card.classList.add("card");
